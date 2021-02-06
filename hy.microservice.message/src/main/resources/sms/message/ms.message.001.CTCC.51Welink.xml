@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<config>
+
+    <import name="xconfig"         class="java.util.ArrayList" />
+    <import name="http"            class="org.hy.common.xml.XHttp" />
+    <import name="account"         class="org.hy.microservice.message.sms.SMSAccount" />
+    <import name="service"         class="org.hy.microservice.message.sms.SMSService_CTCC_51Welink" />
+    
+    
+    
+    <!-- 短信账户配置参数信息 -->
+    <xconfig>
+    
+        <http id="MS_Message_XHttp_CTCC_51Welink">
+            <protocol>https</protocol>
+            <ip>api.51welink.com</ip>
+            <url>/EncryptionSubmit/SendSms.ashx</url>
+            <contentType>application/json</contentType> <!-- text/html -->
+            <requestType ref="this.$Request_Type_Post" />
+        </http>
+    
+
+        <account id="MS_Message_Account_CTCC_51Welink">
+            <accountId  encrypt="org.hy.common.StringHelp">wzybyxzrgs</accountId>
+            <accountPwd encrypt="org.hy.common.StringHelp">wzybyxzrgs2021</accountPwd>
+            <productId>1012808</productId>
+        </account>
+        
+        
+        <service id="MS_Message_Service_CTCC_51Welink">
+            <constructor>
+                <http    ref="MS_Message_XHttp_CTCC_51Welink" />
+                <account ref="MS_Message_Account_CTCC_51Welink" />
+            </constructor>
+        </service>
+        
+    </xconfig>
+    
+</config>

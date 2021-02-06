@@ -16,6 +16,11 @@
             <item>
                 <value>config/message/ms.message.XSSO.xml</value>
             </item>
+            
+            <!-- 加载数据库目录所有配置文件 -->
+            <item>
+                <value>sms/message</value>
+            </item>
 
             <!-- 加载数据库目录所有配置文件 -->
             <item>
