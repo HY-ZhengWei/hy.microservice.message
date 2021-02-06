@@ -22,9 +22,9 @@
     
 
         <account id="MS_Message_Account_CTCC_51Welink">
-            <accountId  encrypt="org.hy.common.StringHelp">wzybyxzrgs</accountId>
-            <accountPwd encrypt="org.hy.common.StringHelp">wzybyxzrgs2021</accountPwd>
-            <productId>1012808</productId>
+            <accountId  encrypt="org.hy.common.StringHelp"></accountId>
+            <accountPwd encrypt="org.hy.common.StringHelp"></accountPwd>
+            <productId></productId>
         </account>
         
         
