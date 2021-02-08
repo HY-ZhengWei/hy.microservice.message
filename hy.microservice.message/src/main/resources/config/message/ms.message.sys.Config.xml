@@ -13,6 +13,13 @@
 
         <xparam id="SYSParam_MS_Message" key="name">
             
+            <item id="MS_Message_Analyses_Password">
+                <name>MS_Message_Analyses_Password</name>
+                <value encrypt="org.hy.common.StringHelp">msmessage</value>
+                <comment>分析中心的访问密码</comment>
+            </item>
+            
+            
             <item id="IsInitDSG_MS_Message">
                 <name>IsInitDSG_MS_Message</name>
                 <value>启用</value>
@@ -29,7 +36,7 @@
             
             <item id="MS_Message_IsCheckToken">
                 <name>MS_Message_IsCheckToken</name>
-                <value>false</value>
+                <value>true</value>
                 <comment>是否验证用户登录的票据</comment>
             </item>
             

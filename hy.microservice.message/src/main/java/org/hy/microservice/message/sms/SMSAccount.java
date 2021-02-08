@@ -26,7 +26,7 @@ public class SMSAccount extends SerializableDef
     
     /** 产品编码，供应商提供 */
     private String productId;
-
+    
     
     
     /**
