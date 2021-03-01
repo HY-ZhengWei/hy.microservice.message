@@ -23,7 +23,7 @@ public class Reciver extends BaseViewMode
     
     /** 消息内容 */
     private String message;
-
+    
     
     
     /**

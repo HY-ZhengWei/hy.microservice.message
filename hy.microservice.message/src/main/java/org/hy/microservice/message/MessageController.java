@@ -40,11 +40,11 @@ public class MessageController
     
     @Autowired
     @Qualifier("UserService")
-    public UserService userService;
+    private UserService userService;
     
     @Autowired
     @Qualifier("MS_Message_IsCheckToken")
-    public Param isCheckToken;
+    private Param isCheckToken;
     
     @Autowired
     @Qualifier("MS_Message_Service_SMSService")
