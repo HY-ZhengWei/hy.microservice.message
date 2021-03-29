@@ -2,4 +2,5 @@ Manifest-Version: 1.0.0
 Created-By: HY.ZhengWei@qq.com  2021
 Specification-Version: 1.0.0  2021-03-01
 SourceCode: https://github.com/HY-ZhengWei/hy.microservice.message
+SourceCode: https://gitee.com/HY-ZhengWei/hy.microservice.message
 Build-JDK: 1.8
