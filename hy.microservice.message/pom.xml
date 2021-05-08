@@ -19,6 +19,7 @@
     
     <name>hy.microservice.message</name>
     <url>https://github.com/HY-ZhengWei/hy.microservice.message</url>
+    <!-- https://gitee.com/HY-ZhengWei/hy.microservice.message -->
     
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
