@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<config>
+
+    <import name="xconfig" class="java.util.ArrayList" />
+    
+    
+    
+    <!-- 配置启用哪种短信、微信等发送服务 -->
+    <xconfig>
+
+        <!-- 短信：创建对象别名 -->
+        <service id="MS_Message_Service_SMSService" this="MS_Message_SMS_Service_CTCC_51Welink" />
+        
+    </xconfig>
+    
+</config>

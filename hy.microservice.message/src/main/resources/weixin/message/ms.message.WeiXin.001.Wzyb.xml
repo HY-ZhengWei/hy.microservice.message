@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<config>
+
+    <import name="xconfig"         class="java.util.ArrayList" />
+    <import name="http"            class="org.hy.common.xml.XHttp" />
+    <import name="service"         class="org.hy.microservice.message.weixin.WeiXinService_Wzyb" />
+    
+    
+    
+    <!-- 短信账户配置参数信息 -->
+    <xconfig>
+    
+        <http id="MS_Message_WeiXin_XHttp_Wzyb">
+            <protocol>http</protocol>
+            <ip>10.1.50.76</ip>
+            <port>8080</port>
+            <url>/brp/services/common/wXmsg/sendWeiXinTemlate</url>
+            <contentType>application/json</contentType> <!-- text/html -->
+            <requestType ref="this.$Request_Type_Post" />
+        </http>
+        
+        
+        <service id="MS_Message_WeiXin_Service_Wzyb">
+            <constructor>
+                <http ref="MS_Message_WeiXin_XHttp_Wzyb" />
+                <String>eNoL6FK5yc_QT2SEnFNr3S4IPPmAwGXuDFNoCoKBMyY</String>   <!-- 微信的消息模板ID -->
+            </constructor>
+        </service>
+        
+    </xconfig>
+    
+</config>

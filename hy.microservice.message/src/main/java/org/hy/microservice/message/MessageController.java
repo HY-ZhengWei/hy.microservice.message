@@ -8,6 +8,7 @@ import org.hy.microservice.common.BaseResponse;
 import org.hy.microservice.message.sms.ISMSService;
 import org.hy.microservice.message.user.UserSSO;
 import org.hy.microservice.message.user.UserService;
+import org.hy.microservice.message.weixin.IWeiXinService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.MediaType;
@@ -50,6 +51,10 @@ public class MessageController
     @Qualifier("MS_Message_Service_SMSService")
     private ISMSService smsService;
     
+    @Autowired
+    @Qualifier("MS_Message_Service_WeiXinService")
+    private IWeiXinService weixinService;
+    
     
     
     /**
@@ -65,7 +70,7 @@ public class MessageController
      */
     @RequestMapping(value="sendSMS" ,method={RequestMethod.POST} ,produces=MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public BaseResponse<Reciver> sendSMS(@RequestParam("token") String i_Token ,@RequestBody Reciver i_Reciver)
+    public BaseResponse<Reciver> sendSMS(@RequestParam(value="token" ,required=false) String i_Token ,@RequestBody Reciver i_Reciver)
     {
         BaseResponse<Reciver> v_RetResp = new BaseResponse<Reciver>();
         
@@ -74,12 +79,12 @@ public class MessageController
             return v_RetResp.setCode("-1").setMessage("未收到任何参数");
         }
         
-        if ( Help.isNull(i_Reciver.getPhone()) ) 
+        if ( Help.isNull(i_Reciver.getPhone()) )
         {
             return v_RetResp.setCode("-2").setMessage("手机号为空");
         }
         
-        if ( Help.isNull(i_Reciver.getMessage()) ) 
+        if ( Help.isNull(i_Reciver.getMessage()) )
         {
             return v_RetResp.setCode("-3").setMessage("消息内容为空");
         }
@@ -89,13 +94,13 @@ public class MessageController
         if ( isCheckToken != null && Boolean.parseBoolean(isCheckToken.getValue()) )
         {
             // 验证票据及用户登录状态
-            if ( Help.isNull(i_Token) ) 
+            if ( Help.isNull(i_Token) )
             {
                 return v_RetResp.setCode("-901").setMessage("非法访问");
             }
             
             v_User = this.userService.getUser(i_Token);
-            if ( v_User == null ) 
+            if ( v_User == null )
             {
                 return v_RetResp.setCode("-901").setMessage("非法访问");
             }
@@ -134,6 +139,96 @@ public class MessageController
             else
             {
                 $Logger.error("发短信给" + i_Reciver.getPhone() + "：" + i_Reciver.getMessage() + "，异常。" + v_SendRet.getParamStr());
+            }
+            
+            return v_RetResp.setCode("-999").setMessage(Help.NVL(v_SendRet.getParamStr() ,"系统异常"));
+        }
+    }
+    
+    
+    
+    /**
+     * 发微信
+     * 
+     * @author      ZhengWei(HY)
+     * @createDate  2021-05-08
+     * @version     v1.0
+     *
+     * @param i_Token    认证票据号
+     * @param i_Reciver  接收者
+     * @return
+     */
+    @RequestMapping(value="sendWeiXin" ,method={RequestMethod.POST} ,produces=MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public BaseResponse<Reciver> sendWeiXin(@RequestParam(value="token" ,required=false) String i_Token ,@RequestBody Reciver i_Reciver)
+    {
+        BaseResponse<Reciver> v_RetResp = new BaseResponse<Reciver>();
+        
+        if ( i_Reciver == null )
+        {
+            return v_RetResp.setCode("-1").setMessage("未收到任何参数");
+        }
+        
+        if ( Help.isNull(i_Reciver.getPhone()) )
+        {
+            return v_RetResp.setCode("-2").setMessage("OpenID为空");
+        }
+        
+        if ( Help.isNull(i_Reciver.getMessage()) )
+        {
+            return v_RetResp.setCode("-3").setMessage("消息内容为空");
+        }
+        
+        
+        UserSSO v_User = null;
+        if ( isCheckToken != null && Boolean.parseBoolean(isCheckToken.getValue()) )
+        {
+            // 验证票据及用户登录状态
+            if ( Help.isNull(i_Token) )
+            {
+                return v_RetResp.setCode("-901").setMessage("非法访问");
+            }
+            
+            v_User = this.userService.getUser(i_Token);
+            if ( v_User == null )
+            {
+                return v_RetResp.setCode("-901").setMessage("非法访问");
+            }
+        }
+        
+        
+        Return<Object> v_SendRet = null;
+        try
+        {
+            v_SendRet = this.weixinService.send(i_Reciver);
+        }
+        catch (Exception exce)
+        {
+            $Logger.error(exce);
+        }
+        
+        if ( v_SendRet.booleanValue() )
+        {
+            if ( v_User != null )
+            {
+                $Logger.info("用户（" + v_User.getUserName() + v_User.getUserId() + "）发微信给" + i_Reciver.getPhone() + "：" + i_Reciver.getMessage() + "，成功");
+            }
+            else
+            {
+                $Logger.info("发微信给" + i_Reciver.getPhone() + "：" + i_Reciver.getMessage() + "，成功");
+            }
+            
+            return v_RetResp;
+        }
+        else
+        {
+            if ( v_User != null )
+            {
+                $Logger.error("用户（" + v_User.getUserName() + v_User.getUserId() + "）发微信给" + i_Reciver.getPhone() + "：" + i_Reciver.getMessage() + "，异常。"  + v_SendRet.getParamStr());
+            }
+            else
+            {
+                $Logger.error("发微信给" + i_Reciver.getPhone() + "：" + i_Reciver.getMessage() + "，异常。" + v_SendRet.getParamStr());
             }
             
             return v_RetResp.setCode("-999").setMessage(Help.NVL(v_SendRet.getParamStr() ,"系统异常"));

@@ -12,7 +12,7 @@
     <!-- 短信账户配置参数信息 -->
     <xconfig>
     
-        <http id="MS_Message_XHttp_CTCC_51Welink">
+        <http id="MS_Message_SMS_XHttp_CTCC_51Welink">
             <protocol>https</protocol>
             <ip>api.51welink.com</ip>
             <url>/EncryptionSubmit/SendSms.ashx</url>
@@ -21,17 +21,17 @@
         </http>
     
 
-        <account id="MS_Message_Account_CTCC_51Welink">
+        <account id="MS_Message_SMS_Account_CTCC_51Welink">
             <accountId  encrypt="org.hy.common.StringHelp">1</accountId>
             <accountPwd encrypt="org.hy.common.StringHelp">2</accountPwd>
             <productId></productId>
         </account>
         
         
-        <service id="MS_Message_Service_CTCC_51Welink">
+        <service id="MS_Message_SMS_Service_CTCC_51Welink">
             <constructor>
-                <http    ref="MS_Message_XHttp_CTCC_51Welink" />
-                <account ref="MS_Message_Account_CTCC_51Welink" />
+                <http    ref="MS_Message_SMS_XHttp_CTCC_51Welink" />
+                <account ref="MS_Message_SMS_Account_CTCC_51Welink" />
             </constructor>
         </service>
         
