@@ -25,6 +25,10 @@
             <item>
                 <value>weixin/message</value>
             </item>
+            
+            <item>
+                <value>mail/message</value>
+            </item>
 
         </startupConfig>
         

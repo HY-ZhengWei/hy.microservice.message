@@ -27,8 +27,9 @@ public class WeiXinService_Wzyb implements IWeiXinService
     private static final Logger $Logger = Logger.getLogger(WeiXinService_Wzyb.class);
     
     
-    private XHttp api;
+    private XHttp  api;
     
+    /** 微信公众号中的消息模板ID */
     private String weiXinTemplateID;
     
     

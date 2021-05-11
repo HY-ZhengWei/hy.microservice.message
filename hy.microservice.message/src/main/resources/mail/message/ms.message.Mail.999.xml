@@ -9,8 +9,8 @@
     <!-- 配置启用哪种短信、微信、邮件等发送服务 -->
     <xconfig>
 
-        <!-- 微信：创建对象别名 -->
-        <service id="MS_Message_Service_WeiXinService" this="MS_Message_WeiXin_Service_Wzyb" />
+        <!-- 邮件：创建对象别名 -->
+        <service id="MS_Message_Service_MailService" this="MS_Message_Mail_Service_Wzyb" />
         
     </xconfig>
     

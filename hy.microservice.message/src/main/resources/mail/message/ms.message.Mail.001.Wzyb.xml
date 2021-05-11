@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<config>
+
+    <import name="xconfig"         class="java.util.ArrayList" />
+    <import name="mail"            class="org.hy.common.mail.MailOwnerInfo" />
+    <import name="service"         class="org.hy.microservice.message.mail.MailService_Wzyb" />
+    
+    
+    
+    <!-- 邮件配置信息 -->
+    <xconfig>
+        
+        <mail id="MS_Message_Mail_Sender_Wzyb">
+            <sendHost>smtp.qiye.163.com</sendHost>
+            <sendPort>465</sendPort>
+            <validate>true</validate>
+            <validateSSL>true</validateSSL>
+            <userName>system@wzyb.com.cn</userName>
+            <password encrypt="org.hy.common.StringHelp">2</password>
+        </mail>
+        
+        
+        <service id="MS_Message_Mail_Service_Wzyb">
+            <constructor>
+                <mail ref="MS_Message_Mail_Sender_Wzyb" />
+            </constructor>
+        </service>
+        
+    </xconfig>
+    
+</config>
